@@ -1,0 +1,11 @@
+.game {
+    width: 80%;
+    margin: 25px 25%;
+    height: 100%;
+}
+.gameRow {
+    height: 107px;
+    width: 157px;
+    margin: 0;
+    float: left;
+}
