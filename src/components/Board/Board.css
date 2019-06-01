@@ -1,5 +1,10 @@
 .selected {
+    border: solid red 1px;
+    margin: 20px;
+}
+.unselected {
     border: solid black 1px;
+    margin: 20px;
 }
 .board {
     width: 150px;
