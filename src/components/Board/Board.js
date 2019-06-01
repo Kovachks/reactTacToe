@@ -11,7 +11,7 @@ class Board extends React.Component {
             squares: Array(9).fill(null),
             selected: props.selected,
             value: props.value
-        }
+        };
     };
 
     setSelected = (i) => {
@@ -25,7 +25,8 @@ class Board extends React.Component {
                 selected: 'selected',
                 squares: squares
             }, () => {
-                this.props.userSelection(i);
+                console.log(this.state)
+                this.props.userSelection(i, squares);
             });
         };
         console.log(i);
@@ -36,8 +37,8 @@ class Board extends React.Component {
         return <Square
                     onClick={() => this.setSelected(i)} 
                     setSelected={this.setSelected} 
-                    value={this.state.squares[i]} 
-                    disabled={this.props.currentBoard === this.state.value ? false : true}
+                    value={this.state.squares[i]}
+                    disabled={((this.props.currentBoard !== this.state.value) || this.props.boardStatus) ? true : false}
                 />
     }
 
@@ -45,7 +46,7 @@ class Board extends React.Component {
     render() {
         return (
             <div 
-                className={`board ${this.props.currentBoard === this.state.value ? 'selected' : 'unselected'}`}
+                className={`board ${this.props.currentBoard === this.state.value ? 'selected' : 'unselected'} ${this.props.boardStatus === 'X' && 'winX'} ${this.props.boardStatus === 'O' && 'winO'}`}
                 value={this.state.value}
             >
                 <div className="board-row">

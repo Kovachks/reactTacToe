@@ -1,5 +1,5 @@
 .selected {
-    border: solid red 1px;
+    border: solid red 2px;
     margin: 20px;
 }
 .unselected {
@@ -10,4 +10,14 @@
     width: 150px;
     float: left;
     margin: 5px;
+}
+.winX {
+    border: solid green 1px;
+    background-color: green;
+    opacity: .7;
+}
+.winO {
+    border: solid blue 1px;
+    background-color: blue;
+    opacity: .9;
 }
