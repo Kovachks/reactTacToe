@@ -1,8 +1,10 @@
 import React from 'react';
-import Board from '../Board/Board.js';
-import ScoreCard from '../ScoreCard/ScoreCard';
-import './Game.css';
+import Board from '../Board/Board';
+import Concede from '../Concede/Concede';
 import Player from '../Player/Player.js'
+import ScoreCard from '../ScoreCard/ScoreCard';
+import { Modal } from 'antd';
+import './Game.css';
 
 class Game extends React.Component {
 
@@ -13,7 +15,23 @@ class Game extends React.Component {
         currentBoard: 4,
         winSequences: ['012', '036', '048', '147', '246', '258', '345', '678'],
         xWins: 0,
-        oWins: 0
+        oWins: 0,
+        visible: false
+    };
+
+    resetGame = () => {
+        this.setState({
+            boardSelected: [0, 0, 0, 0, 1, 0, 0, 0, 0],
+            boardStatus: Array(9).fill(null),
+            currentPlayer: 'X',
+            currentBoard: 4,
+            winSequences: ['012', '036', '048', '147', '246', '258', '345', '678'],
+            xWins: 0,
+            oWins: 0,
+            visible: false
+        }, () => {
+            console.log(this.state)
+        });
     };
 
     winCheck = (val, squares, currentBoard, currentPlayer, nextPlayer) => {
@@ -114,6 +132,28 @@ class Game extends React.Component {
         };
     };
 
+    handleConcede = currentPlayer => {
+        console.log(currentPlayer);
+        this.setState({
+            winningPlayer: currentPlayer,
+            visible: true
+        }, () => {
+            console.log(this.state)
+        })
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.resetGame();
+      };
+    
+      handleCancel = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+
     renderBoard(i, s) {
         return <Board 
                     value={i} 
@@ -128,6 +168,14 @@ class Game extends React.Component {
     render() {
         return (
             <div className='game'>
+                <Modal
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+
+                >
+                    Player {this.state.winningPlayer} has won!
+                </Modal>
                 <Player currentPlayer={this.state.currentPlayer}/>
                 <ScoreCard 
                     wins={this.state.xWins}
@@ -136,6 +184,10 @@ class Game extends React.Component {
                 <ScoreCard 
                     wins={this.state.oWins}
                     player='O'
+                />
+                <Concede 
+                    player={this.state.currentPlayer}
+                    onClick={this.handleConcede}
                 />
                 <div className='gameRow'>
                     {this.renderBoard(0)}

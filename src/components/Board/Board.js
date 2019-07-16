@@ -45,17 +45,17 @@ class Board extends React.Component {
                 className={`board ${this.props.selected === 1 ? 'selected' : 'unselected'} ${this.props.boardStatus === 'X' && 'winX'} ${this.props.boardStatus === 'O' && 'winO'}`}
                 value={this.state.value}
             >
-                <div className="board-row">
+                <div className="boardRow">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </div>
-                <div className="board-row">
+                <div className="boardRow">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
                 </div>
-                <div className="board-row">
+                <div className="boardRow">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
