@@ -1,10 +1,15 @@
+/* .grid-container {
+    display: grid;
+    grid-gap: 50px 50px;
+} */
+
 .game {
     width: 80%;
-    margin: 25px 25%;
-    height: 100%;
+    margin: 0 25%;
+    height: 560px;
 }
 .gameRow {
-    height: 107px;
+    height: 124px;
     width: 100%;
     margin: 10px;
     float: left;

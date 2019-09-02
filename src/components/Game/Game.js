@@ -43,6 +43,7 @@ class Game extends React.Component {
         } else {
             winPlayer = 'oWins';
         };
+
         for (let i = 0; i < this.state.winSequences.length; i++) {
             let compareArr = this.state.winSequences[i].split('');
             let winCount = 0;
@@ -155,7 +156,7 @@ class Game extends React.Component {
       };
 
     renderBoard(i, s) {
-        return <Board 
+        return <Board
                     value={i} 
                     selected={this.state.boardSelected[i]}
                     userSelection={this.userSelection} 
@@ -189,21 +190,24 @@ class Game extends React.Component {
                     player={this.state.currentPlayer}
                     onClick={this.handleConcede}
                 />
-                <div className='gameRow'>
-                    {this.renderBoard(0)}
-                    {this.renderBoard(1)}
-                    {this.renderBoard(2)}
+                <div class='grid-container'>
+                    <div className='gameRow'>
+                        {this.renderBoard(0)}
+                        {this.renderBoard(1)}
+                        {this.renderBoard(2)}
+                    </div>
+                    <div className='gameRow'>
+                        {this.renderBoard(3)}
+                        {this.renderBoard(4)}
+                        {this.renderBoard(5)}
+                    </div>
+                    <div className='gameRow'>
+                        {this.renderBoard(6)}
+                        {this.renderBoard(7)}
+                        {this.renderBoard(8)}
+                    </div>
                 </div>
-                <div className='gameRow'>
-                    {this.renderBoard(3)}
-                    {this.renderBoard(4)}
-                    {this.renderBoard(5)}
-                </div>
-                <div className='gameRow'>
-                    {this.renderBoard(6)}
-                    {this.renderBoard(7)}
-                    {this.renderBoard(8)}
-                </div>
+                
             </div>
              
         )

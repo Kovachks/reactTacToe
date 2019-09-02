@@ -1,5 +1,5 @@
 .selected {
-    border: solid red 2px;
+    border: solid red 1px;
     margin: 20px;
 }
 .unselected {
@@ -7,20 +7,25 @@
     margin: 20px;
 }
 .board {
-    width: 150px;
     float: left;
-    margin: 5px;
+    height: 124px;
+    width: 150px;
 }
 .boardRow {
-    width: 500px;
+    font-size: 12px;
+    height: 41px;
+    width: 150px;
+    text-align: center;
 }
-.winX {
-    border: solid green 1px;
-    background-color: green;
-    opacity: .7;
+.boardWon{
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
-.winO {
-    border: solid blue 1px;
-    background-color: blue;
-    opacity: .9;
+.letterWon{
+    height: 100%;
+    margin: 0 auto;
+    width: 80%;
+    font-size: 70px;
+    text-align: center;
 }

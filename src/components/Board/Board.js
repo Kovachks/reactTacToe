@@ -42,24 +42,32 @@ class Board extends React.Component {
     render() {
         return (
             <div 
-                className={`board ${this.props.selected === 1 ? 'selected' : 'unselected'} ${this.props.boardStatus === 'X' && 'winX'} ${this.props.boardStatus === 'O' && 'winO'}`}
+                className={`grid-item board ${this.props.selected === 1 ? 'selected' : 'unselected'} ${this.props.boardStatus === 'X' && 'winX'} ${this.props.boardStatus === 'O' && 'winO'}`}
                 value={this.state.value}
             >
-                <div className="boardRow">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
+                {this.props.boardStatus === 'X' || this.props.boardStatus === 'O' ? 
+                <div class="boardWon">
+                    <p class="letterWon">{this.props.boardStatus}</p>
                 </div>
-                <div className="boardRow">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="boardRow">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                : 
+                <>
+                    <div className="boardRow">
+                        {this.renderSquare(0)}
+                        {this.renderSquare(1)}
+                        {this.renderSquare(2)}
+                    </div>
+                    <div className="boardRow">
+                        {this.renderSquare(3)}
+                        {this.renderSquare(4)}
+                        {this.renderSquare(5)}
+                    </div>
+                    <div className="boardRow">
+                        {this.renderSquare(6)}
+                        {this.renderSquare(7)}
+                        {this.renderSquare(8)}
+                    </div>
+                </>
+                }
             </div>
         )
     }
