@@ -1,0 +1,14 @@
+.loginForm {
+    width: 20vw;
+    margin: 0 auto;
+}
+
+.loginForm input {
+    margin: 5px auto;
+    width: 100%;
+}
+
+.loginForm button {
+    width: 7vw;
+    margin-left: 0;
+}
