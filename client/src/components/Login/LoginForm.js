@@ -13,8 +13,8 @@ class LoginForm extends React.Component {
     render() {
         return (
             <div class="loginForm">
-                <input placeholder="email" type="text">{this.state.formValues.email}</input>
-                <input placeholder="password" type="password">{this.state.formValues.password}</input>
+                <input value={this.state.formValues.email} placeholder="email" type="text"></input>
+                <input value={this.state.formValues.password} placeholder="password" type="password"></input>
                 <button onClick={() => this.props.onSubmit()}>Login</button>
             </div>
         );    
