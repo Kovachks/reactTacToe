@@ -1,15 +1,42 @@
 import React from 'react';
 import LoginForm from './LoginForm';
-import Nav from '../Nav/Nav';
+import axios from 'axios';
 
 class Login extends React.Component {
     state = {
-        isLoggedIn: false
+        isLoggedIn: false,
+        formValues: {
+            email: '',
+            password: ''
+        }
+    };
+
+    componentDidMount = e => {
+
+    };
+
+    onTextChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        this.setState({
+            formValues: {
+                ...this.state.formValues,
+                [name]: value
+            }
+        });
     };
 
     handleLogin = () => {
+        const user = this.state.formValues
 
-    }
+        console.log(user);
+        axios.post('/user/signup', user).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        });
+    };
 
     render() {
         return(
@@ -18,7 +45,11 @@ class Login extends React.Component {
                 <h3>React-Tac-Toe</h3>
                 {this.state.isLoggedIn ? 
                     <div>You are logged in!</div> :
-                    <LoginForm onSubmit={this.handleLogin}/>
+                    <LoginForm
+                        formValues={this.state.formValues}
+                        onSubmit={this.handleLogin}
+                        onChange={this.onTextChange}
+                    />
                 }
             </div>
         );

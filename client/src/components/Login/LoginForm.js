@@ -5,16 +5,16 @@ class LoginForm extends React.Component {
 
     state = {
         formValues: {
-            email: null,
-            password: null,
+            email: '',
+            password: '',
         }
     };
 
     render() {
         return (
-            <div class="loginForm">
-                <input value={this.state.formValues.email} placeholder="email" type="text"></input>
-                <input value={this.state.formValues.password} placeholder="password" type="password"></input>
+            <div className="loginForm">
+                <input name="email" value={this.props.formValues.email} type="text" onChange={e => this.props.onChange(e)} />
+                <input name='password' value={this.props.formValues.password} type="password" onChange={e => this.props.onChange(e)}/>
                 <button onClick={() => this.props.onSubmit()}>Login</button>
             </div>
         );    

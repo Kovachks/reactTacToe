@@ -11,8 +11,8 @@ class Home extends React.Component {
 
     render () {
         return (
-            <div class='container'>
-                <h4 class='header'>React-Tac-Toe</h4>
+            <div className='container'>
+                <h4 className='header'>React-Tac-Toe</h4>
                 {this.state.isAuth ?
                 <Redirect to="/Game" /> :
                 <Redirect to="/Login" />
