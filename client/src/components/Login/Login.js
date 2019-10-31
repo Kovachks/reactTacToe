@@ -4,10 +4,13 @@ import axios from 'axios';
 
 class Login extends React.Component {
     state = {
+        errFlag: true,
+        errMessages: [],
         isLoggedIn: false,
         formValues: {
             email: '',
-            password: ''
+            password: '',
+            userName: ''
         }
     };
 
@@ -18,7 +21,6 @@ class Login extends React.Component {
     onTextChange = e => {
         const name = e.target.name;
         const value = e.target.value;
-
         this.setState({
             formValues: {
                 ...this.state.formValues,
@@ -34,7 +36,12 @@ class Login extends React.Component {
         axios.post('/user/signup', user).then(res => {
             console.log(res);
         }).catch(err => {
-            console.log(err);
+            this.setState({
+                errFlag: true,
+                errMessages: err.map(err => err)
+            }, () => {
+                console.log(this.state);
+            });
         });
     };
 
@@ -50,6 +57,11 @@ class Login extends React.Component {
                         onSubmit={this.handleLogin}
                         onChange={this.onTextChange}
                     />
+                }
+                {this.state.errFlag &&
+                this.state.errMessages.map(ele => {
+                    return <p style={{colo: 'red'}}>{ele}</p>
+                })
                 }
             </div>
         );
