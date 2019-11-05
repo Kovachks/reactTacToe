@@ -1,16 +1,17 @@
-/* .header {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 1;
-}
-.buttonRow {
-  grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 5;
-} */
 .buttons {
   width: 210px;
   margin-left: 20px;
+}
+
+.loginDiv{
+  position: absolute;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  margin: auto;
+  width: 250px;
+  height: 200px;
 }

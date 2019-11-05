@@ -7,11 +7,32 @@ class Login extends React.Component {
         errFlag: true,
         errMessages: [],
         isLoggedIn: false,
-        formValues: {
-            email: '',
-            password: '',
-            userName: ''
-        }
+        formValues: [
+            {
+                placeholder: 'Username',
+                value: '',
+                name: 'userName',
+                type: 'text'
+            },
+            {
+                placeholder: 'Email',
+                value: '',
+                name: 'email',
+                type: 'text'
+            },
+            {
+                placeholder: 'Password',
+                value: '',
+                name: 'password',
+                type: 'password'
+            },
+            {
+                placeholder: 'Confirm Password',
+                value: '',
+                name: 'passwordConfirmation',
+                type: 'passwowrd'
+            }
+        ]
     };
 
     componentDidMount = e => {
@@ -21,46 +42,77 @@ class Login extends React.Component {
     onTextChange = e => {
         const name = e.target.name;
         const value = e.target.value;
-        this.setState({
-            formValues: {
-                ...this.state.formValues,
-                [name]: value
-            }
+        this.setState(() => {
+            return {
+                formValues: this.state.formValues.map(ele => {
+                    if (ele.name === name) {
+                        ele.value = value;
+                    }
+                    return ele;
+                })
+            };
         });
     };
 
     handleLogin = () => {
-        const user = this.state.formValues
+        const user = {
+            name: this.state.formValues[0].value,
+            email: this.state.formValues[1].value,
+            password: this.state.formValues[2].value,
+            passwordConfirmation: this.state.formValues[3].value
+        };
+
+        if (Object.values(user).indexOf("") >= -1) {
+            this.setState(() => {
+                return {
+                    errFlag: true,
+                    errMessages: ['Please fill in all fields']
+                };
+            });
+            return
+        };
 
         console.log(user);
-        axios.post('/user/signup', user).then(res => {
-            console.log(res);
-        }).catch(err => {
-            this.setState({
-                errFlag: true,
-                errMessages: err.map(err => err)
+
+        if (user.password !== user.passwordConfirmation || user.password === "") {
+            this.setState(() => {
+                return {
+                    errFlag: true,
+                    errMessages: ['Passwords did not match']
+                }
             }, () => {
-                console.log(this.state);
+                console.log(this.state)
             });
-        });
+        } else {
+            delete user.passwordConfirmation;
+            axios.post('/user/signup', user).then(res => {
+                console.log(res);
+            }).catch(err => {
+                this.setState({
+                    errFlag: true,
+                    errMessages: err.map(err => err)
+                }, () => {
+                    console.log(this.state);
+                });
+            });
+        };
     };
 
     render() {
         return(
-            <div style={{'width': '15vw', 'margin': '30vh auto'}}>
+            <div className="loginDiv">
                 {/* <Nav /> */}
                 <h3>React-Tac-Toe</h3>
-                {this.state.isLoggedIn ? 
-                    <div>You are logged in!</div> :
-                    <LoginForm
-                        formValues={this.state.formValues}
-                        onSubmit={this.handleLogin}
-                        onChange={this.onTextChange}
-                    />
+                {this.state.formValues &&
+                <LoginForm
+                    formValues={this.state.formValues}
+                    onSubmit={this.handleLogin}
+                    onChange={this.onTextChange}
+                />            
                 }
                 {this.state.errFlag &&
-                this.state.errMessages.map(ele => {
-                    return <p style={{colo: 'red'}}>{ele}</p>
+                this.state.errMessages.map((ele, index) => {
+                    return <p key={index} style={{color: 'red'}}>{ele}</p>
                 })
                 }
             </div>

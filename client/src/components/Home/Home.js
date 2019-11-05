@@ -29,10 +29,11 @@ class Home extends React.Component {
         return (
             <div 
                 // className='container'
-                style={{
-                    width: '250px',
-                    margin: '25% auto 0 auto'
-                }}
+                // style={{
+                //     width: '250px',
+                //     margin: '25% auto 0 auto'
+                // }}
+                className="loginDiv"
             >
             {this.renderRedirect()}
                 <h4 
