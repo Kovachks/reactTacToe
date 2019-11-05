@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import { Button } from 'antd';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -102,7 +103,16 @@ class Login extends React.Component {
         return(
             <div className="loginDiv">
                 {/* <Nav /> */}
-                <h3>React-Tac-Toe</h3>
+                <h4 
+                    className='header'
+                    style={{
+                        textAlign: 'center',
+                        fontSize: 25,
+                        marginBottom: 15
+                    }}
+                >
+                Signup
+                </h4>
                 {this.state.formValues &&
                 <LoginForm
                     formValues={this.state.formValues}

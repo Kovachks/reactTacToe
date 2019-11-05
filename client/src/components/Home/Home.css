@@ -5,12 +5,10 @@
 
 .loginDiv{
   position: absolute;
-  position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 200px;
   left: 0;
   right: 0;
-  height: 30%;
   margin: auto;
   width: 250px;
   height: 200px;
