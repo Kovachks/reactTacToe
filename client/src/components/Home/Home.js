@@ -12,6 +12,21 @@ class Home extends React.Component {
         redirect: false,
     };
 
+    componentDidMount = () => {
+        console.log(this.props.location.state)
+
+        if (this.props.location.state.isLoggedIn) {
+            this.setState({
+                isAuth: true,
+            });
+        };
+
+    };
+
+    componentDidUpdate = () => {
+        console.log(this.props.location.state)
+    }
+
     setRedirect = route => {
         this.setState({
           redirect: true,

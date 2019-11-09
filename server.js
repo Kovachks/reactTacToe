@@ -23,8 +23,3 @@ db.sequelize.sync().then(function() {
     console.log("App now listening on port:", PORT);
   });
 });
-// create a GET route
-app.get('/express_backend', (req, res) => {
-  console.log('backend hit')
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-});
