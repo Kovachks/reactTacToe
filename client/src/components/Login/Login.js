@@ -10,15 +10,9 @@ class Login extends React.Component {
         isLoggedIn: false,
         formValues: [
             {
-                placeholder: 'Username',
+                placeholder: 'Username/Email',
                 value: '',
                 name: 'userName',
-                type: 'text'
-            },
-            {
-                placeholder: 'Email',
-                value: '',
-                name: 'email',
                 type: 'text'
             },
             {
@@ -26,12 +20,6 @@ class Login extends React.Component {
                 value: '',
                 name: 'password',
                 type: 'password'
-            },
-            {
-                placeholder: 'Confirm Password',
-                value: '',
-                name: 'passwordConfirmation',
-                type: 'passwowrd'
             }
         ]
     };
@@ -58,12 +46,10 @@ class Login extends React.Component {
     handleLogin = () => {
         const user = {
             name: this.state.formValues[0].value,
-            email: this.state.formValues[1].value,
-            password: this.state.formValues[2].value,
-            passwordConfirmation: this.state.formValues[3].value
+            password: this.state.formValues[1].value,
         };
 
-        if (Object.values(user).indexOf("") >= -1) {
+        if (Object.values(user).indexOf("") > -1) {
             this.setState(() => {
                 return {
                     errFlag: true,
@@ -72,31 +58,15 @@ class Login extends React.Component {
             });
             return
         };
-
-        console.log(user);
-
-        if (user.password !== user.passwordConfirmation || user.password === "") {
-            this.setState(() => {
-                return {
-                    errFlag: true,
-                    errMessages: ['Passwords did not match']
-                }
-            }, () => {
-                console.log(this.state)
+        
+        axios.post('/user/login', user).then(res => {
+            console.log(res);
+        }).catch(err => {
+            this.setState({
+                errFlag: true,
+                errMessages: err.response.data.map(err => err)
             });
-        } else {
-            delete user.passwordConfirmation;
-            axios.post('/user/signup', user).then(res => {
-                console.log(res);
-            }).catch(err => {
-                this.setState({
-                    errFlag: true,
-                    errMessages: err.map(err => err)
-                }, () => {
-                    console.log(this.state);
-                });
-            });
-        };
+        });
     };
 
     render() {
@@ -111,14 +81,14 @@ class Login extends React.Component {
                         marginBottom: 15
                     }}
                 >
-                Signup
+                Login
                 </h4>
                 {this.state.formValues &&
                 <LoginForm
                     formValues={this.state.formValues}
                     onSubmit={this.handleLogin}
                     onChange={this.onTextChange}
-                />            
+                />
                 }
                 {this.state.errFlag &&
                 this.state.errMessages.map((ele, index) => {

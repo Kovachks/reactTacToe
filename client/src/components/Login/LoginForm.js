@@ -19,7 +19,7 @@ const LoginForm = props => {
                     }}
                 />
             })}
-            <Button onClick={() => props.onSubmit()}>Signup</Button>
+            <Button onClick={() => props.onSubmit()}>Login</Button>
         </div>
     );    
 };
